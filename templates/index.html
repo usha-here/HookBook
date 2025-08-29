@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900">
+    <!-- Navbar -->
+    <nav class="bg-black px-6 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo + Text -->
+            <a href="/" class="flex items-center space-x-2">
+                <img src="https://th.bing.com/th/id/OIP.25N826BC1Yy3S1zAUsMn9gD6D6?w=512&h=512&rs=1&pid=ImgDetMain"
+                      alt="Logo"
+                      class="h-10">
+                <span class="text-white text-2xl font-bold">HookTheBook</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="flex space-x-6">
+                <li><a href="/" class="text-white px-4 py-2 rounded-lg transition duration-300
+                   hover:bg-white hover:text-black shadow-md">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-blue-400">Recommend</a></li>
+                <li><a href="/contact" class="text-white hover:text-blue-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="h-[65vh] flex flex-col md:flex-row justify-center">
+        <div class="bg-[url('https://wallpaperaccess.com/full/922690.jpg')] h-96 w-full bg-cover bg-center px-20 py-14">
+            <div class="w-full mb-12 lg:w-3/6 flex flex-col items-start justify-center">
+                <h2 class="text-4xl lg:text-5xl font-bold text-teal-900 text-center lg:text-left">
+                    Discover Your Next Great Read ....
+                </h2><br>
+                <p class="mt-5 text-xl text-black font-semibold">
+                    Welcome to HookTheBook, your personalized shortcut to the right book.
+                    Cut the clutter, skip the stress, and uncover the exact reads you need to excel.
+                </p><br>
+                <a href="/recommend"
+                   class="text-yellow-100 text-xl lg:text-2xl font-semibold border border-yellow
+                   px-8 py-4 hover:bg-zinc-800 rounded-full">
+                    Discover Here
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top 50 Books Section -->
+<div class="container mx-auto px-6">
+    <h1 class="text-white text-5xl font-bold text-center mb-10">Top 50 Books</h1>
+    
+    <!-- Responsive grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% for i in range(book_name|length) %}
+
+        <!-- Book Card -->
+        <div class="bg-zinc-800 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+            <img class="w-full h-32 object-cover" src="{{ image[i] }}" alt="Book Cover">
+            <div class="p-3 flex flex-col space-y-1">
+                <h2 class="text-white text-l font-bold">{{ book_name[i] }}</h2>
+                <p class="text-gray-300 text-sm">{{ author[i] }}</p>
+                <p class="text-gray-400 text-sm">Votes: {{ votes[i] }}</p>
+                <p class="text-yellow-400 text-sm">Rating: {{ rating[i] }} ⭐</p>
+                <p class="text-white text-sm">Availability: {{ available[i] }}</p>
+            </div>
+        </div>
+        <!-- Repeat this block for other books -->
+    {% endfor %}
+
+    </div>
+</div>
+
+    <footer class="bg-black text-white py-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 HookTheBook. All rights reserved.</p>
+            <p>Made with ❤️ by Alphacon</p> 
+</body>
+</html>
