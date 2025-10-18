@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900">
+    <!-- Navbar -->
+    <nav class="bg-black px-6 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo + Text -->
+            <a href="/" class="flex items-center space-x-2">
+                <img src="https://th.bing.com/th/id/OIP.25N826BC1Yy3S1zAUsMn9gD6D6?w=512&h=512&rs=1&pid=ImgDetMain"
+                      alt="Logo"
+                      class="h-10">
+                <span class="text-white text-2xl font-bold">HookTheBook</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="flex space-x-6">
+                <li><a href="/" class="text-white px-4 py-2 rounded-lg transition duration-300
+                   hover:bg-white hover:text-black shadow-md">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-blue-400">Recommend</a></li>
+                <li><a href="/contact" class="text-white hover:text-blue-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    </br></br>
+
+    <!-- Top 50 Books Section -->
+<div class="container mx-auto px-6">
+    <h1 class="text-white text-5xl font-bold text-center mb-10">Recommend Books</h1>
+   <form action="/recommend_books" method="post" class="w-full max-w-lg mx-auto mt-6">
+    <label for="search" class="sr-only">Search books</label>
+    <input
+        id="search"
+        name="user_input"
+        type="text"
+        placeholder="Search by title"
+        aria-label="Search for a book"
+        class="w-full px-7 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+    >
+    <button
+        type="submit"
+        class="w-full mt-3 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-3 rounded-lg shadow-md transition-colors duration-150"
+    >
+        Search
+    </button>
+</form>
+</br></br>
+    
+    <!-- Responsive grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+ {% if data %}
+  {% for i in data %}
+    <div class="bg-zinc-800 rounded-xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 p-4">
+      <img class="w-full h-48 object-cover mb-3" src="{{ i[2] }}" alt="Book cover">
+      <h3 class="text-white text-lg font-semibold mb-1">{{ i[0] }}</h3>
+      <p class="text-gray-300 text-sm mb-1">{{ i[1] }}</p>
+      <p class="text-gray-400 text-sm mb-2">Rating: {{ i[3] }}</p>
+      <p class="mt-2">
+        {% if i[4] and i[4] != '#' %}
+          <a href="{{ i[4] }}" target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded">
+             Available
+          </a>
+        {% else %}
+          <span class="text-gray-400">Available: N/A</span>
+        {% endif %}
+      </p>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="col-span-full text-center text-gray-300">No results to display. Try searching above.</div>
+{% endif %}
+
+    </div>
+</div>
+
+    <footer class="bg-black text-white py-6 mt-12">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 HookTheBook. All rights reserved.</p>
+            <p>Made with ❤️ by Alphacon</p> 
+</body>
+</html>
